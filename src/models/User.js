@@ -18,11 +18,11 @@ const User = sequelize.define('User', {
     allowNull: false
   },
 
-  googleId: {
-  type: DataTypes.STRING,
-  allowNull: true,
-  unique: true,
-},
+//   googleId: {
+//   type: DataTypes.STRING,
+//   allowNull: true,
+//   unique: true,
+// },
 
   displayName: DataTypes.STRING,
   dob: DataTypes.DATE,
@@ -41,9 +41,40 @@ const User = sequelize.define('User', {
   },
   pronouns: DataTypes.STRING,
   interestedIn: {
-    type: DataTypes.JSON, // store as array
+    type: DataTypes.STRING, // store as array
     allowNull: true
   },
+  photos: {
+    type: DataTypes.JSON, // array of URLs
+    allowNull: true
+  },
+  profilePicture: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  isProfileComplete: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+
+
+  preferences: {
+  type: DataTypes.JSON, // Store as structured object
+  allowNull: true,
+  defaultValue: {
+    minAge: 18,
+    maxAge: 99,
+    lookingFor: [],
+    relationshipType: null,
+    hasChildren: null,
+    smoking: null,
+    alcohol: null,
+    diet: null
+  }
+},
+
+
+
   about: DataTypes.TEXT,
   photos: {
     type: DataTypes.JSON, // store array of URLs

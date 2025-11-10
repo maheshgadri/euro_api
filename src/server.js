@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5001;
 
     // Sync models safely (no alter, no force)
     // Creates tables if they don't exist
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     console.log('📦 Database synced successfully');
 
     // Start the server

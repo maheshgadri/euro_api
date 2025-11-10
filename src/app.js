@@ -2,9 +2,13 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const matchRoutes = require('./routes/matchRoutes');
+
+const profileRoutes = require('./routes/profileRoutes');
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
+const preferencesRoutes = require('./routes/preferencesRoutes');
 
 const app = express();
 
@@ -67,8 +71,11 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api', matchRoutes);
 // Default route
 app.get('/', (req, res) => res.send('API with MySQL is running'));
+app.use('/api/profile', profileRoutes);
+app.use('/uploads', express.static('uploads')); 
+app.use('/api/preferences', preferencesRoutes);
 
 module.exports = app;
