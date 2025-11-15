@@ -74,8 +74,18 @@ app.use('/api/users', userRoutes);
 app.use('/api', matchRoutes);
 // Default route
 app.get('/', (req, res) => res.send('API with MySQL is running'));
-app.use('/api/profile', profileRoutes);
-app.use('/uploads', express.static('uploads')); 
+// // app.use('/api/profile', profileRoutes);
+// app.use('/uploads', express.static('uploads')); 
 app.use('/api/preferences', preferencesRoutes);
+
+app.use("/api/profile", require("./routes/profile"));
+
+// Profile Uploads (photos + dp)
+// app.use('/api/profile/upload', require('./routes/profileRoutes')); 
+
+
+// app.use('/api/profile', profileRoutes);
+
+
 
 module.exports = app;

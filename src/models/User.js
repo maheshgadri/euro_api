@@ -57,6 +57,12 @@ const User = sequelize.define('User', {
     defaultValue: false
   },
 
+  location: {
+  type: DataTypes.STRING,
+  allowNull: true,
+},
+
+
 
   preferences: {
   type: DataTypes.JSON, // Store as structured object

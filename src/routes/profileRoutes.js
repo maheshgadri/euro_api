@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/upload/:id', upload.array('photos', 5), async (req, res) => {
+router.post('/:id', upload.array('photos', 5), async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
@@ -46,6 +46,32 @@ router.post('/upload/:id', upload.array('photos', 5), async (req, res) => {
   } catch (error) {
     console.error('Upload error:', error);
     res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// ******************************************
+// PROFILE PICTURE UPLOAD
+// ******************************************
+router.post('/profile/:id', upload.single('profile'), async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+
+    const filePath = '/uploads/' + req.file.filename;
+
+    user.profilePicture = filePath;
+    await user.save();
+
+    res.json({
+      message: 'Profile picture updated successfully',
+      profilePicture: filePath
+    });
+
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
