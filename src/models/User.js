@@ -44,10 +44,10 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING, // store as array
     allowNull: true
   },
-  photos: {
-    type: DataTypes.JSON, // array of URLs
-    allowNull: true
-  },
+  // photos: {
+  //   type: DataTypes.JSON, // array of URLs
+  //   allowNull: true
+  // },
   profilePicture: {
     type: DataTypes.STRING,
     allowNull: true
